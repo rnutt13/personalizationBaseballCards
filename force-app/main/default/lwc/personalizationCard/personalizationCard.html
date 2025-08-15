@@ -1,0 +1,177 @@
+<template>
+    <div class="personalization-card">
+        <div class="card-header">
+            <h2 class="card-title">
+                <lightning-icon icon-name="standard:customer_360" size="small" class="title-icon"></lightning-icon>
+                Personalization Insights
+            </h2>
+            <p class="card-subtitle">AI-powered preference analysis and recommendations</p>
+        </div>
+
+        <!-- Affinity Wheel Section -->
+        <div class="affinity-section">
+            <h3 class="section-title">Category Affinities</h3>
+            <div class="wheel-container">
+                <svg class="affinity-wheel" width="300" height="300" viewBox="0 0 300 300">
+                    <!-- Background rings -->
+                    <template for:each={wheelBackground} for:item="ring">
+                        <circle key={ring.radius} 
+                               cx="150" 
+                               cy="150" 
+                               r={ring.radius} 
+                               fill="none" 
+                               stroke="rgba(255,255,255,0.2)" 
+                               stroke-width="1"
+                               stroke-opacity={ring.strokeOpacity}></circle>
+                    </template>
+                    
+                    <!-- Center point -->
+                    <circle cx="150" cy="150" r="3" fill="#fff" opacity="0.8"></circle>
+                    
+                    <!-- Affinity points -->
+                    <template for:each={affinityWheel} for:item="point">
+                        <g key={point.category}>
+                            <!-- Connection line -->
+                            <line x1="150" 
+                                  y1="150" 
+                                  x2={point.x} 
+                                  y2={point.y} 
+                                  stroke={point.color} 
+                                  stroke-width="2" 
+                                  opacity="0.6"></line>
+                            
+                            <!-- Affinity point -->
+                            <circle cx={point.x} 
+                                   cy={point.y} 
+                                   r={point.size} 
+                                   fill={point.color} 
+                                   stroke="#fff" 
+                                   stroke-width="2"
+                                   style="cursor: pointer;"
+                                   data-category={point.category}
+                                   onclick={handleCategoryClick}></circle>
+                        </g>
+                    </template>
+                </svg>
+                
+                <!-- Category labels -->
+                <div class="category-labels">
+                    <template for:each={affinityWheel} for:item="point">
+                        <div key={point.category} 
+                             class="category-label"
+                             style={point.transform}
+                             data-category={point.category}
+                             onclick={handleCategoryClick}>
+                            <span class="category-name">{point.category}</span>
+                            <span class="affinity-score">{point.affinity}%</span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            
+            <!-- Selected Category Details -->
+            <template if:true={selectedCategoryData}>
+                <div class="category-details">
+                    <h4>Selected: {selectedCategoryData.category}</h4>
+                    <div class="detail-metrics">
+                        <div class="metric">
+                            <span class="metric-label">View Time:</span>
+                            <span class="metric-value">{selectedCategoryData.viewTime}s</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Money Spent:</span>
+                            <span class="metric-value">${selectedCategoryData.moneySpent}</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Clicks:</span>
+                            <span class="metric-value">{selectedCategoryData.clicks}</span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Next Best Content Section -->
+        <div class="recommendations-section">
+            <h3 class="section-title">
+                <lightning-icon icon-name="standard:article" size="x-small"></lightning-icon>
+                Next Best Content
+            </h3>
+            <div class="content-list">
+                <template for:each={nextBestContent} for:item="content">
+                    <div key={content.id} 
+                         class="content-item"
+                         data-id={content.id}
+                         onclick={handleContentClick}>
+                        <div class="content-icon">
+                            <lightning-icon icon-name={content.icon} size="small"></lightning-icon>
+                        </div>
+                        <div class="content-info">
+                            <h4 class="content-title">{content.title}</h4>
+                            <div class="content-meta">
+                                <span class="content-type">{content.type}</span>
+                                <span class="relevance-score">Relevance: {content.relevanceScore}%</span>
+                                <span class="engagement-level" data-level={content.engagement}>{content.engagement} Engagement</span>
+                            </div>
+                        </div>
+                        <div class="content-arrow">
+                            <lightning-icon icon-name="utility:chevronright" size="x-small"></lightning-icon>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Next Best Product Section -->
+        <div class="recommendations-section">
+            <h3 class="section-title">
+                <lightning-icon icon-name="standard:product" size="x-small"></lightning-icon>
+                Next Best Products
+            </h3>
+            <div class="product-grid">
+                <template for:each={nextBestProducts} for:item="product">
+                    <div key={product.id} 
+                         class="product-item"
+                         data-id={product.id}
+                         onclick={handleProductClick}>
+                        <div class="product-image">
+                            <img src={product.imageUrl} alt={product.name} />
+                            <template if:false={product.inStock}>
+                                <div class="out-of-stock-overlay">Out of Stock</div>
+                            </template>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name">{product.name}</h4>
+                            <p class="product-category">{product.category}</p>
+                            <div class="product-meta">
+                                <span class="product-price">{product.price}</span>
+                                <span class="relevance-score">{product.relevanceScore}%</span>
+                            </div>
+                            <p class="product-reason">{product.reason}</p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer-section">
+            <div class="update-info">
+                <lightning-icon icon-name="standard:einstein" size="x-small"></lightning-icon>
+                <span>Real-time AI personalization • Updates every 5 seconds</span>
+            </div>
+            <div class="powered-by">
+                <span>Powered By</span>
+                <div class="platform-icons">
+                    <lightning-icon icon-name="standard:einstein" size="x-small"></lightning-icon>
+                    <lightning-icon icon-name="standard:data_cloud" size="x-small"></lightning-icon>
+                    <lightning-icon icon-name="standard:marketing_actions" size="x-small"></lightning-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

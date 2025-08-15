@@ -1,0 +1,459 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.personalization-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 24px;
+    color: white;
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.personalization-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.title-icon {
+    --slds-c-icon-color-foreground-default: #FFD700;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+.affinity-section {
+    margin-bottom: 32px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wheel-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24px 0;
+}
+
+.affinity-wheel {
+    max-width: 100%;
+    height: auto;
+}
+
+.affinity-wheel circle {
+    transition: all 0.3s ease;
+}
+
+.affinity-wheel circle:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.category-labels {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.category-label {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 11px;
+    text-align: center;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.category-label:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.05);
+}
+
+.category-name {
+    display: block;
+    font-weight: 600;
+    color: white;
+}
+
+.affinity-score {
+    display: block;
+    font-weight: bold;
+    color: #FFD700;
+    margin-top: 2px;
+}
+
+.category-details {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+    backdrop-filter: blur(4px);
+}
+
+.category-details h4 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: #FFD700;
+}
+
+.detail-metrics {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.metric-label {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.metric-value {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.recommendations-section {
+    margin-bottom: 24px;
+}
+
+.content-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.content-item {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.content-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.content-icon {
+    margin-right: 12px;
+    --slds-c-icon-color-foreground-default: #4ECDC4;
+}
+
+.content-info {
+    flex: 1;
+}
+
+.content-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: white;
+}
+
+.content-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    flex-wrap: wrap;
+}
+
+.content-type {
+    color: #4ECDC4;
+    font-weight: 500;
+}
+
+.relevance-score {
+    color: #FFD700;
+    font-weight: 600;
+}
+
+.engagement-level {
+    font-weight: 500;
+}
+
+.engagement-level[data-level="High"] {
+    color: #32CD32;
+}
+
+.engagement-level[data-level="Medium"] {
+    color: #FFA500;
+}
+
+.engagement-level[data-level="Low"] {
+    color: #FF6B6B;
+}
+
+.content-arrow {
+    --slds-c-icon-color-foreground-default: rgba(255, 255, 255, 0.6);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+}
+
+.product-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.product-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.product-image {
+    position: relative;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.out-of-stock-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 107, 107, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+}
+
+.product-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: white;
+    line-height: 1.3;
+}
+
+.product-category {
+    font-size: 11px;
+    margin: 0 0 6px 0;
+    color: #4ECDC4;
+    font-weight: 500;
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.product-price {
+    font-size: 13px;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.product-reason {
+    font-size: 10px;
+    margin: 0;
+    opacity: 0.8;
+    line-height: 1.3;
+}
+
+.divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    margin: 24px 0;
+}
+
+.footer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 11px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.update-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.8;
+}
+
+.powered-by {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.8;
+}
+
+.platform-icons {
+    display: flex;
+    gap: 4px;
+}
+
+.platform-icons lightning-icon {
+    --slds-c-icon-color-foreground-default: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .personalization-card {
+        padding: 16px;
+        margin: 8px;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+    }
+    
+    .detail-metrics {
+        gap: 12px;
+    }
+    
+    .content-meta {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .footer-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .personalization-card {
+        padding: 28px;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 18px;
+    }
+    
+    .card-title {
+        font-size: 26px;
+    }
+}
+
+/* Desktop adjustments */
+@media (min-width: 1025px) {
+    .personalization-card {
+        padding: 32px;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+    
+    .card-title {
+        font-size: 28px;
+    }
+    
+    .content-list {
+        gap: 16px;
+    }
+    
+    .affinity-section {
+        margin-bottom: 36px;
+    }
+    
+    .wheel-container {
+        margin: 28px 0;
+    }
+}
+
+/* Animation for affinity changes */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.affinity-wheel circle:not([r="3"]) {
+    animation: pulse 2s infinite ease-in-out;
+}
